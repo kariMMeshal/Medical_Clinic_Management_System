@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Patient {
-    private Integer id;
+    private Integer patientId;
     private String patientName;
     private Integer patientAge;
     private String patientPhone;
     private List<MedicalRecord> medicalRecords = new ArrayList<>();
 
     public Patient(Integer id, String patientName, Integer patientAge, String patientPhone, List<MedicalRecord> medicalRecords) {
-        this.id = id;
+        this.patientId = id;
         this.patientName = patientName;
         this.patientAge = patientAge;
         this.patientPhone = patientPhone;
@@ -21,12 +21,12 @@ public class Patient {
     public Patient() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getPatientId() {
+        return patientId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPatientId(Integer patientId) {
+        this.patientId = patientId;
     }
 
     public String getPatientName() {
@@ -59,5 +59,16 @@ public class Patient {
 
     public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
         this.medicalRecords = medicalRecords;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "patientId=" + patientId +
+                ", patientName='" + patientName + '\'' +
+                ", patientAge=" + patientAge +
+                ", patientPhone='" + patientPhone + '\'' +
+                ", medicalRecords=" + medicalRecords +
+                '}';
     }
 }
