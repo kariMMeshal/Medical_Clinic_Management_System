@@ -1,6 +1,6 @@
 package org.medical.model;
 
-public class Doctor {
+public abstract class Doctor {
     private Integer doctorId;
     private String doctorName;
     private String doctorSpecialization;
@@ -37,4 +37,6 @@ public class Doctor {
     public void setDoctorSpecialization(String doctorSpecialization) {
         this.doctorSpecialization = doctorSpecialization;
     }
+
+    public abstract String doctorCanHandle();
 }
