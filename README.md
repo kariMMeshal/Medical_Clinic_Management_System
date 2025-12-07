@@ -9,43 +9,35 @@ No UI is included—interactions are handled programmatically via the `Main` cla
 ## Project Structure
 
 src/main/java/org/medical
-│
-├─ model/             # Data models
-│   ├─ Appointment.java
-│   ├─ Doctor.java
-│   ├─ MedicalRecord.java
-│   ├─ Patient.java
-│   └─ ... other specialized doctor and record classes
-│
-├─ repositories/      # Data access layer (CRUD)
-│   ├─ AppointmentRepository.java
-│   ├─ DoctorRepository.java
-│   ├─ MedicalRecordRepository.java
-│   └─ PatientRepository.java
-│
-├─ service/           # Business logic layer
-│   ├─ AppointmentService.java
-│   ├─ DoctorService.java
-│   ├─ MedicalRecordService.java
-│   └─ PatientService.java
-│
-├─ util/
-│   ├─ Enums/         # Enum types
-│   │   ├─ DoctorSpecialization.java
-│   │   └─ ReportType.java
-│   ├─ factory/       # Factory pattern for object creation
-│   │   ├─ DoctorFactory.java
-│   │   └─ MedicalReportFactory.java
-│   └─ singleton/    # Singleton utility classes
-│       ├─ AppointmentScheduler.java
-│       └─ DBManager.java
-│
-└─ Main.java          # Entry point(Client)
-
+├── model/                  # Data models
+│   ├── Appointment.java
+│   ├── Doctor.java
+│   ├── MedicalRecord.java
+│   ├── Patient.java
+│   └── ... (other specialized doctor and record classes)
+├── repositories/           # Data access layer (CRUD operations)
+│   ├── AppointmentRepository.java
+│   ├── DoctorRepository.java
+│   ├── MedicalRecordRepository.java
+│   └── PatientRepository.java
+├── service/                # Business logic layer
+│   ├── AppointmentService.java
+│   ├── DoctorService.java
+│   ├── MedicalRecordService.java
+│   └── PatientService.java
+├── util/
+│   ├── Enums/              # Enum types
+│   │   ├── DoctorSpecialization.java
+│   │   └── ReportType.java
+│   ├── factory/            # Factory pattern for object creation
+│   │   ├── DoctorFactory.java
+│   │   └── MedicalReportFactory.java
+│   └── singleton/          # Singleton utility classes
+│       ├── AppointmentScheduler.java
+│       └── DBManager.java
+└── Main.java               # Entry point (client)
 ---
 
-
----
 
 ## Main Features
 
