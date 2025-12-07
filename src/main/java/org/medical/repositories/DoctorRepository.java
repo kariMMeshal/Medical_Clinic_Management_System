@@ -1,12 +1,15 @@
 package org.medical.repositories;
 
 import org.medical.model.Doctor;
+import org.medical.util.singleton.DBManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorRepository {
-    private final List<Doctor> doctors = new ArrayList<>();
+    private final DBManager dbManager = DBManager.getInstance();
+    private final List<Doctor> doctors = dbManager.getDoctors();
+
 
 
     public void save(Doctor doctor) {

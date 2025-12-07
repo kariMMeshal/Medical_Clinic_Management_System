@@ -1,12 +1,14 @@
 package org.medical.repositories;
 
 import org.medical.model.Appointment;
+import org.medical.util.singleton.DBManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentRepository {
-    private final List<Appointment> appointments = new ArrayList<>();
+    private final DBManager dbManager = DBManager.getInstance();
+    private final List<Appointment> appointments = dbManager.getAppointments();
 
 
     public void save(Appointment appointment) {
