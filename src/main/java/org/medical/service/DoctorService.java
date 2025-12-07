@@ -19,7 +19,7 @@ public class DoctorService {
     // static method to get the singleton instance
     public static DoctorService getInstance(DoctorRepository doctorRepository) {
         if (instance == null) {
-            synchronized (DBManager.class) {
+            synchronized (DoctorService.class) {
                 if (instance == null) {
                     instance = new DoctorService(doctorRepository);
                 }

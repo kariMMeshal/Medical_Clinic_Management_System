@@ -3,7 +3,6 @@ package org.medical.service;
 import org.medical.model.Appointment;
 import org.medical.model.Doctor;
 import org.medical.repositories.AppointmentRepository;
-import org.medical.util.singleton.DBManager;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,7 +17,7 @@ public class AppointmentService {
 
     public static AppointmentService getInstance(AppointmentRepository appointmentRepository) {
         if (instance == null) {
-            synchronized (DBManager.class) {
+            synchronized (AppointmentService.class) {
                 if (instance == null) {
                     instance = new AppointmentService(appointmentRepository);
                 }
@@ -34,7 +33,7 @@ public class AppointmentService {
 
 
     public boolean cancelAppointment(Integer appointmentId) {
-       return appointmentRepo.delete(appointmentId);
+        return appointmentRepo.delete(appointmentId);
     }
 
     public List<Appointment> getAllAppointments() {

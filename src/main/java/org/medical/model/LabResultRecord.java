@@ -5,8 +5,8 @@ import org.medical.util.Enums.ReportType;
 import java.time.LocalDate;
 
 public class LabResultRecord extends MedicalRecord {
-    public LabResultRecord(Integer recordId, ReportType reportType, LocalDate createdAt, Integer patientId) {
-        super(recordId, reportType, createdAt, patientId);
+    public LabResultRecord(Integer patientId, Integer recordId, LocalDate createdAt, ReportType recordType, String content) {
+        super(patientId, recordId, createdAt, recordType, content);
     }
 
     @Override

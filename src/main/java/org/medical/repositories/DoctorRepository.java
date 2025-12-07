@@ -17,7 +17,7 @@ public class DoctorRepository {
 
     public static DoctorRepository getInstance() {
         if (instance == null) {
-            synchronized (DBManager.class) {
+            synchronized (DoctorRepository.class) {
                 if (instance == null) {
                     instance = new DoctorRepository();
                 }

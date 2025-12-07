@@ -9,15 +9,25 @@ public abstract class MedicalRecord {
     private Integer patientId;
     private LocalDate createdAt;
     private ReportType recordType;
+    private String content;
 
-    public MedicalRecord(Integer recordId, ReportType reportType, LocalDate createdAt, Integer patientId) {
-        this.recordId = recordId;
-        this.recordType = reportType;
-        this.createdAt = createdAt;
+    public MedicalRecord(Integer patientId, Integer recordId, LocalDate createdAt, ReportType recordType, String content) {
         this.patientId = patientId;
+        this.recordId = recordId;
+        this.createdAt = createdAt;
+        this.recordType = recordType;
+        this.content = content;
     }
 
     public MedicalRecord() {
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public abstract String createSummary();
@@ -60,7 +70,8 @@ public abstract class MedicalRecord {
                 "recordId=" + recordId +
                 ", patientId=" + patientId +
                 ", createdAt=" + createdAt +
-                ", notes='" + recordType + '\'' +
+                ", recordType=" + recordType +
+                ", content='" + content + '\'' +
                 '}';
     }
 }

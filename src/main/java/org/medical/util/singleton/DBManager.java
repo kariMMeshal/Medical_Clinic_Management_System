@@ -35,9 +35,10 @@ public class DBManager {
 
     // Patient dummy data for testing
     private void feedDummyData() {
-        records.add(new PatientHistoryRecord(1, ReportType.PATIENT_HISTORY, LocalDate.of(2024, 2, 15), 1));
-        records.add(new PatientHistoryRecord(2, ReportType.PATIENT_HISTORY, LocalDate.of(2024, 2, 15), 1));
-        records.add(new PatientHistoryRecord(3, ReportType.PATIENT_HISTORY, LocalDate.of(2024, 2, 15), 1));
+        records.add(new PatientHistoryRecord(1, 1, LocalDate.of(2025, 11, 15), ReportType.PATIENT_HISTORY, "Record 1 Content "));
+        records.add(new PatientHistoryRecord(1, 5, LocalDate.of(2025, 11, 15), ReportType.PATIENT_HISTORY, "Record 1 Content "));
+        records.add(new PatientHistoryRecord(2, 2, LocalDate.of(2025, 11, 18), ReportType.PATIENT_HISTORY, "Record 2 Content"));
+        records.add(new PatientHistoryRecord(3, 3, LocalDate.of(2025, 11, 22), ReportType.PATIENT_HISTORY, "Record 3 Content"));
 
         patients.add(new Patient(1, "Kareem", 20, "015", records));
         patients.add(new Patient(2, "Mohamed", 23, "010", records));

@@ -9,12 +9,12 @@ import org.medical.util.Enums.ReportType;
 import java.time.LocalDate;
 
 public class MedicalReportFactory {
-    public static MedicalRecord createReport(Integer recordId, ReportType reportType, LocalDate createdAt, Integer patientId) {
-        return switch (reportType) {
-            case PATIENT_HISTORY -> new PatientHistoryRecord(recordId, reportType, createdAt, patientId);
-            case PRESCRIPTION -> new PrescriptionRecord(recordId, reportType, createdAt, patientId);
-            case LAB_RESULTS -> new LabResultRecord(recordId, reportType, createdAt, patientId);
-            default -> throw new IllegalArgumentException("Unknown report type: " + reportType);
+    public static MedicalRecord createReport(Integer patientId, Integer recordId, LocalDate createdAt, ReportType recordType, String content) {
+        return switch (recordType) {
+            case PATIENT_HISTORY -> new PatientHistoryRecord(patientId, recordId, createdAt, recordType, content);
+            case PRESCRIPTION -> new PrescriptionRecord(patientId, recordId, createdAt, recordType, content);
+            case LAB_RESULTS -> new LabResultRecord(patientId, recordId, createdAt, recordType, content);
+            default -> throw new IllegalArgumentException("Unknown report type: " + recordType);
         };
     }
 
