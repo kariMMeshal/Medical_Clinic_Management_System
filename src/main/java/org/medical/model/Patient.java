@@ -7,14 +7,12 @@ public class Patient {
     private Integer patientId;
     private String patientName;
     private Integer patientAge;
-    private String patientPhone;
     private List<MedicalRecord> medicalRecords = new ArrayList<>();
 
-    public Patient(Integer id, String patientName, Integer patientAge, String patientPhone, List<MedicalRecord> medicalRecords) {
+    public Patient(Integer id, String patientName, Integer patientAge, List<MedicalRecord> medicalRecords) {
         this.patientId = id;
         this.patientName = patientName;
         this.patientAge = patientAge;
-        this.patientPhone = patientPhone;
         this.medicalRecords = medicalRecords;
     }
 
@@ -45,13 +43,6 @@ public class Patient {
         this.patientAge = patientAge;
     }
 
-    public String getPatientPhone() {
-        return patientPhone;
-    }
-
-    public void setPatientPhone(String patientPhone) {
-        this.patientPhone = patientPhone;
-    }
 
     public List<MedicalRecord> getMedicalRecords() {
         return medicalRecords;
@@ -67,7 +58,6 @@ public class Patient {
                 "patientId=" + patientId +
                 ", patientName='" + patientName + '\'' +
                 ", patientAge=" + patientAge +
-                ", patientPhone='" + patientPhone + '\'' +
                 ", medicalRecords=" + medicalRecords +
                 '}';
     }

@@ -8,13 +8,36 @@ import java.util.List;
 import java.util.Objects;
 
 public class PatientRepository {
-
+    private static volatile PatientRepository instance;
     private final DBManager dbManager = DBManager.getInstance();
     private final List<Patient> patients = dbManager.getPatients();
 
+    private PatientRepository() {
+    }
 
-    public void save(Patient patient) {
-        patients.add(patient);
+    public static PatientRepository getInstance() {
+        if (instance == null) {
+            synchronized (PatientRepository.class) {
+                if (instance == null) {
+                    instance = new PatientRepository();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public boolean save(Patient patient) {
+        return patients.add(patient);
+    }
+
+    public boolean update(Patient patient) {
+        for (int i = 0; i < patients.size(); i++) {
+            if (Objects.equals(patients.get(i).getPatientId(), patient.getPatientId())) {
+                patients.set(i, patient);
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -28,8 +51,8 @@ public class PatientRepository {
     }
 
 
-    public void delete(Patient patient) {
-        patients.remove(patient);
+    public boolean deleteById(Integer id) {
+        return patients.removeIf(p -> Objects.equals(p.getPatientId(), id));
     }
 
 

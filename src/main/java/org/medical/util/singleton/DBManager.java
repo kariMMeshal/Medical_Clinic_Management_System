@@ -40,9 +40,9 @@ public class DBManager {
         records.add(new PatientHistoryRecord(2, 2, LocalDate.of(2025, 11, 18), ReportType.PATIENT_HISTORY, "Record 2 Content"));
         records.add(new PatientHistoryRecord(3, 3, LocalDate.of(2025, 11, 22), ReportType.PATIENT_HISTORY, "Record 3 Content"));
 
-        patients.add(new Patient(1, "Kareem", 20, "015", records));
-        patients.add(new Patient(2, "Mohamed", 23, "010", records));
-        patients.add(new Patient(3, "Moustafa", 23, "010", records));
+        patients.add(new Patient(1, "Kareem", 20, records));
+        patients.add(new Patient(2, "Mohamed", 23, records));
+        patients.add(new Patient(3, "Moustafa", 23, records));
     }
 
     // Getters for repositories to use Data Base Tables From the Singleton db instance
