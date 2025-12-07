@@ -17,6 +17,7 @@ public class Appointment {
         this.appointmentTime = appointmentTime;
         this.appointmentStatus = appointmentStatus;
     }
+
     public Appointment() {
     }
 
@@ -24,32 +25,52 @@ public class Appointment {
     public Integer getAppointmentId() {
         return appointmentId;
     }
+
     public void setAppointmentId(Integer appointmentId) {
         this.appointmentId = appointmentId;
     }
+
     public String getAppointmentPatient() {
         return appointmentPatient;
     }
+
     public void setAppointmentPatient(String appointmentPatient) {
         this.appointmentPatient = appointmentPatient;
     }
+
     public String getAppointmentDoctor() {
         return appointmentDoctor;
     }
+
     public void setAppointmentDoctor(String appointmentDoctor) {
         this.appointmentDoctor = appointmentDoctor;
     }
+
     public LocalDateTime getAppointmentTime() {
         return appointmentTime;
     }
+
     public void setAppointmentTime(LocalDateTime appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
+
     public String getAppointmentStatus() {
         return appointmentStatus;
     }
+
     public void setAppointmentStatus(String appointmentStatus) {
         this.appointmentStatus = appointmentStatus;
     }
 
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "appointmentId=" + appointmentId +
+                ", appointmentPatient='" + appointmentPatient + '\'' +
+                ", appointmentDoctor='" + appointmentDoctor + '\'' +
+                ", appointmentTime=" + appointmentTime +
+                ", appointmentStatus='" + appointmentStatus + '\'' +
+                '}';
+    }
 }

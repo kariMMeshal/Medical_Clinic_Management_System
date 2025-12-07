@@ -1,31 +1,62 @@
 package org.medical.repositories;
 
 import org.medical.model.Appointment;
-import org.medical.util.singleton.DBManager;
+import org.medical.util.singleton.AppointmentScheduler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AppointmentRepository {
-    private final DBManager dbManager = DBManager.getInstance();
-    private final List<Appointment> appointments = dbManager.getAppointments();
+
+    private final AppointmentScheduler appointmentScheduler = AppointmentScheduler.getInstance();
 
 
     public void save(Appointment appointment) {
-        appointments.add(appointment);
+        if (appointmentScheduler.scheduleAppointment(appointment)) {
+            System.out.print("Appointment Added Successfully");
+        } else {
+            System.out.println("Couldn't Add The Appointment The Doctor Is Busy At this time ");
+        }
     }
+
 
     public List<Appointment> findAll() {
-        return new ArrayList<>(appointments);
+        return appointmentScheduler.getAppointments();
     }
 
 
-    public Appointment findById(int id) {
-        return appointments.stream().filter(a -> a.getAppointmentId() == id).findFirst().orElse(null);
+    public Appointment findById(Integer id) {
+        return appointmentScheduler.getAppointments().stream()
+                .filter(a -> Objects.equals(a.getAppointmentId(), id))
+                .findFirst()
+                .orElse(null);
     }
 
-    public void delete(Appointment appointment) {
-        appointments.remove(appointment);
+
+    public void delete(Integer appointmentId) {
+        appointmentScheduler.cancelAppointment(appointmentId);
     }
 
+    // Optional: find all appointments for a specific doctor
+    public List<Appointment> findByDoctor(String doctorName) {
+        List<Appointment> result = new ArrayList<>();
+        for (Appointment a : appointmentScheduler.getAppointments()) {
+            if (Objects.equals(a.getAppointmentDoctor(), doctorName)) {
+                result.add(a);
+            }
+        }
+        return result;
+    }
+
+    // Optional: find all appointments for a specific patient
+    public List<Appointment> findByPatient(String patientName) {
+        List<Appointment> result = new ArrayList<>();
+        for (Appointment a : appointmentScheduler.getAppointments()) {
+            if (Objects.equals(a.getAppointmentPatient(), patientName)) {
+                result.add(a);
+            }
+        }
+        return result;
+    }
 }
