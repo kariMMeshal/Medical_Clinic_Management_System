@@ -1,13 +1,12 @@
 # Medical Clinic Management System (Java)
 
-A Java project simulating a medical clinic management system. The project is structured using **repositories**, **services**, **singleton**, and **factory** patterns for clean, maintainable code.  
+A Java project simulating a medical clinic management system. The project is structured using **repositories**, **services**, **singleton**, and **factory** patterns for clean, maintainable code.
 
-No UI is included—interactions are handled programmatically via the `Main` class.
-
----
+**Note:** No UI is included—interactions are handled programmatically via the `Main` class.
 
 ## Project Structure
 
+```
 src/main/java/org/medical
 ├── model/                  # Data models
 │   ├── Appointment.java
@@ -36,8 +35,7 @@ src/main/java/org/medical
 │       ├── AppointmentScheduler.java
 │       └── DBManager.java
 └── Main.java               # Entry point (client)
----
-
+```
 
 ## Main Features
 
@@ -47,7 +45,7 @@ The project implements four main services, each interacting with a corresponding
 - Schedule appointments with doctors.
 - Cancel appointments.
 - List all appointments.
-- Uses **singleton** for repository and **AppointmentScheduler**.
+- Uses **singleton** for repository and `AppointmentScheduler`.
 
 ### 2. DoctorService
 - Add new doctors (General, Cardiologist, Neurologist, Lab, etc.).
@@ -69,20 +67,16 @@ The project implements four main services, each interacting with a corresponding
 - List all patients.
 - Uses **singleton** for repository.
 
----
-
 ## Design Patterns
 
-1. **Singleton**
-   - Ensures a single instance for repositories (`AppointmentRepository`, `DoctorRepository`, `MedicalRecordRepository`, `PatientRepository`) and services.
-   - Ensures consistent access to in-memory database via `DBManager`.
+### 1. Singleton
+- Ensures a single instance for repositories (`AppointmentRepository`, `DoctorRepository`, `MedicalRecordRepository`, `PatientRepository`) and services.
+- Ensures consistent access to in-memory database via `DBManager`.
 
-2. **Factory**
-   - Used to create specialized objects without exposing the creation logic:
-     - `DoctorFactory` → creates different doctor types.
-     - `MedicalReportFactory` → creates different medical record types (`PatientHistoryRecord`, `PrescriptionRecord`, etc.).
-
----
+### 2. Factory
+- Used to create specialized objects without exposing the creation logic:
+  - `DoctorFactory` → creates different doctor types.
+  - `MedicalReportFactory` → creates different medical record types (`PatientHistoryRecord`, `PrescriptionRecord`, etc.).
 
 ## Running the Project
 
@@ -91,8 +85,7 @@ The project implements four main services, each interacting with a corresponding
 3. Run the `Main.java` class.
 4. All operations (CRUD for patients, doctors, appointments, and medical records) are executed programmatically.
 
-Example:
-
+### Example
 ```java
 PatientRepository patientRepo = PatientRepository.getInstance();
 PatientService patientService = PatientService.getInstance(patientRepo);
@@ -103,16 +96,11 @@ patientService.addPatient(new Patient(1, "Alice", 30, null));
 // List all patients
 for (Patient p : patientService.findAllPatients()) {
     System.out.println(p);
-} ```
-
----
+}
+```
 
 ## Notes
-
-Until now there is no GUI or web interface is provided.
-
-All data is stored in memory(RunTime) using DBManager.
-
-Fully demonstrates clean architecture, service-repository pattern, and design patterns like Singleton and Factory.
-
-Easily extendable for adding new services, records, or doctor types.
+- Until now, no GUI or web interface is provided.
+- All data is stored in memory (runtime) using `DBManager`.
+- Fully demonstrates clean architecture, service-repository pattern, and design patterns like Singleton and Factory.
+- Easily extendable for adding new services, records, or doctor types.
