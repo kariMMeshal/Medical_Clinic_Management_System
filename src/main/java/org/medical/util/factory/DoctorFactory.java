@@ -7,11 +7,11 @@ import org.medical.model.NeurologistDoctor;
 import org.medical.util.Enums.DoctorSpecialization;
 
 public class DoctorFactory {
-    public static Doctor createDoctor(DoctorSpecialization specialization) {
+    public static Doctor createDoctor(DoctorSpecialization specialization, Integer doctorId,String doctorName ) {
         return switch (specialization) {
-            case CARDIOLOGIST -> new CardiologistDoctor();
-            case NEUROLOGIST -> new NeurologistDoctor();
-            case GENERAL -> new GeneralDoctor();
+            case CARDIOLOGIST -> new CardiologistDoctor(doctorId, doctorName, specialization);
+            case NEUROLOGIST -> new NeurologistDoctor(doctorId, doctorName, specialization);
+            case GENERAL -> new GeneralDoctor(doctorId, doctorName, specialization);
         };
 
     }

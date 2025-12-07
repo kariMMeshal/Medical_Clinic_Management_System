@@ -1,16 +1,18 @@
 package org.medical.model;
 
+import org.medical.util.Enums.ReportType;
+
 import java.time.LocalDate;
 
 public abstract class MedicalRecord {
     private Integer recordId;
     private Integer patientId;
     private LocalDate createdAt;
-    private String notes;
+    private ReportType recordType;
 
-    public MedicalRecord(Integer recordId, String notes, LocalDate createdAt, Integer patientId) {
+    public MedicalRecord(Integer recordId, ReportType reportType, LocalDate createdAt, Integer patientId) {
         this.recordId = recordId;
-        this.notes = notes;
+        this.recordType = reportType;
         this.createdAt = createdAt;
         this.patientId = patientId;
     }
@@ -44,12 +46,12 @@ public abstract class MedicalRecord {
         this.createdAt = createdAt;
     }
 
-    public String getNotes() {
-        return notes;
+    public ReportType getRecordType() {
+        return recordType;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setRecordType(ReportType recordType) {
+        this.recordType = recordType;
     }
 
     @Override
@@ -58,7 +60,7 @@ public abstract class MedicalRecord {
                 "recordId=" + recordId +
                 ", patientId=" + patientId +
                 ", createdAt=" + createdAt +
-                ", notes='" + notes + '\'' +
+                ", notes='" + recordType + '\'' +
                 '}';
     }
 }

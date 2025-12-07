@@ -1,6 +1,7 @@
 package org.medical.util.singleton;
 
 import org.medical.model.*;
+import org.medical.util.Enums.ReportType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,9 +35,9 @@ public class DBManager {
 
     // Patient dummy data for testing
     private void feedDummyData() {
-        records.add(new PatientHistoryRecord(1, "", LocalDate.of(2024, 2, 15), 1));
-        records.add(new PatientHistoryRecord(2, "", LocalDate.of(2024, 2, 15), 1));
-        records.add(new PatientHistoryRecord(3, "", LocalDate.of(2024, 2, 15), 1));
+        records.add(new PatientHistoryRecord(1, ReportType.PATIENT_HISTORY, LocalDate.of(2024, 2, 15), 1));
+        records.add(new PatientHistoryRecord(2, ReportType.PATIENT_HISTORY, LocalDate.of(2024, 2, 15), 1));
+        records.add(new PatientHistoryRecord(3, ReportType.PATIENT_HISTORY, LocalDate.of(2024, 2, 15), 1));
 
         patients.add(new Patient(1, "Kareem", 20, "015", records));
         patients.add(new Patient(2, "Mohamed", 23, "010", records));

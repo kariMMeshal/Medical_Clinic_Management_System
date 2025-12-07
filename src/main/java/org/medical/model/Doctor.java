@@ -1,11 +1,13 @@
 package org.medical.model;
 
+import org.medical.util.Enums.DoctorSpecialization;
+
 public abstract class Doctor {
     private Integer doctorId;
     private String doctorName;
-    private String doctorSpecialization;
+    private DoctorSpecialization doctorSpecialization;
 
-    public Doctor(Integer doctorId, String doctorName, String doctorSpecialization) {
+    public Doctor(Integer doctorId, String doctorName, DoctorSpecialization doctorSpecialization) {
         this.doctorId = doctorId;
         this.doctorName = doctorName;
         this.doctorSpecialization = doctorSpecialization;
@@ -30,13 +32,22 @@ public abstract class Doctor {
         this.doctorName = doctorName;
     }
 
-    public String getDoctorSpecialization() {
+    public DoctorSpecialization getDoctorSpecialization() {
         return doctorSpecialization;
     }
 
-    public void setDoctorSpecialization(String doctorSpecialization) {
+    public void setDoctorSpecialization(DoctorSpecialization doctorSpecialization) {
         this.doctorSpecialization = doctorSpecialization;
     }
 
     public abstract String doctorCanHandle();
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "doctorId=" + doctorId +
+                ", doctorName='" + doctorName + '\'' +
+                ", doctorSpecialization=" + doctorSpecialization.toString() +
+                '}';
+    }
 }

@@ -1,14 +1,14 @@
 package org.medical.model;
 
+import org.medical.util.Enums.ReportType;
+
 import java.time.LocalDate;
 
 public class PrescriptionRecord extends MedicalRecord {
-    public PrescriptionRecord(Integer recordId, String notes, LocalDate createdAt, Integer patientId) {
-        super(recordId, notes, createdAt, patientId);
+    public PrescriptionRecord(Integer recordId, ReportType reportType, LocalDate createdAt, Integer patientId) {
+        super(recordId, reportType, createdAt, patientId);
     }
 
-    public PrescriptionRecord() {
-    }
 
     @Override
     public String createSummary() {
