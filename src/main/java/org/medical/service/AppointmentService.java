@@ -10,16 +10,17 @@ import java.util.List;
 
 public class AppointmentService {
     private static volatile AppointmentService instance;
-    private final AppointmentRepository appointmentRepo = new AppointmentRepository();
+    private final AppointmentRepository appointmentRepo;
 
-    private AppointmentService() {
+    private AppointmentService(AppointmentRepository appointmentRepository) {
+        this.appointmentRepo = appointmentRepository;
     }
 
-    public static AppointmentService getInstance() {
+    public static AppointmentService getInstance(AppointmentRepository appointmentRepository) {
         if (instance == null) {
             synchronized (DBManager.class) {
                 if (instance == null) {
-                    instance = new AppointmentService();
+                    instance = new AppointmentService(appointmentRepository);
                 }
             }
         }
@@ -28,13 +29,12 @@ public class AppointmentService {
 
     public boolean scheduleAppointment(String patientName, Doctor doctor, LocalDateTime time) {
         Appointment appointment = new Appointment(null, patientName, doctor.getDoctorName(), time, "Scheduled");
-        appointmentRepo.save(appointment);
-        return true;
+        return appointmentRepo.save(appointment);
     }
 
 
-    public void cancelAppointment(Integer appointmentId) {
-        appointmentRepo.delete(appointmentId);
+    public boolean cancelAppointment(Integer appointmentId) {
+       return appointmentRepo.delete(appointmentId);
     }
 
     public List<Appointment> getAllAppointments() {

@@ -27,13 +27,12 @@ public class AppointmentScheduler {
     }
 
 
-    // Add new appointment if the doctor is free at the requested time
     public boolean scheduleAppointment(Appointment appointment) {
         if (isDoctorAvailable(appointment.getAppointmentDoctor(), appointment.getAppointmentTime())) {
             appointments.add(appointment);
             return true;
         }
-        return false; // appointment not available
+        return false;
     }
 
 

@@ -2,6 +2,7 @@ package org.medical.repositories;
 
 import org.medical.model.Appointment;
 import org.medical.util.singleton.AppointmentScheduler;
+import org.medical.util.singleton.DBManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +10,26 @@ import java.util.Objects;
 
 public class AppointmentRepository {
 
+    private static AppointmentRepository instance;
     private final AppointmentScheduler appointmentScheduler = AppointmentScheduler.getInstance();
 
+    private AppointmentRepository() {
 
-    public void save(Appointment appointment) {
-        if (appointmentScheduler.scheduleAppointment(appointment)) {
-            System.out.print("Appointment Added Successfully");
-        } else {
-            System.out.println("Couldn't Add The Appointment The Doctor Is Busy At this time ");
+    }
+
+    public static AppointmentRepository getInstance() {
+        if (instance == null) {
+            synchronized (DBManager.class) {
+                if (instance == null) {
+                    instance = new AppointmentRepository();
+                }
+            }
         }
+        return instance;
+    }
+
+    public boolean save(Appointment appointment) {
+        return appointmentScheduler.scheduleAppointment(appointment);
     }
 
 
@@ -34,8 +46,8 @@ public class AppointmentRepository {
     }
 
 
-    public void delete(Integer appointmentId) {
-        appointmentScheduler.cancelAppointment(appointmentId);
+    public boolean delete(Integer appointmentId) {
+        return appointmentScheduler.cancelAppointment(appointmentId);
     }
 
     // Optional: find all appointments for a specific doctor
