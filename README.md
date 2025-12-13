@@ -89,11 +89,11 @@ The project implements four main services, each interacting with a corresponding
 ### 5. MVC (Model-View-Controller)
 - Organizes the application into three layers:
     - **Model**: Data and business logic (`Patient`, `Doctor`, `MedicalRecord`, `Appointment`).
-    - **View**: Presentation/UI layer (e.g., future Flutter or other front-end components).
+    - **View**: Presentation/UI layer (e.g., future React or other front-end components).
     - **Controller**: Handles user input and communicates between Model and View.
 - Ensures separation of concerns for maintainability and scalability.
 
-### Service Layer
+### 6. Service Layer
 - Encapsulates business logic and coordinates data access:
     - `PatientService`, `MedicalRecordService`, `DoctorService`, `AppointmentService`.
 - Sits between controllers and repositories, providing a clean API for the application and supporting the MVC architecture.
