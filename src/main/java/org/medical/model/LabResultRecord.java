@@ -13,4 +13,15 @@ public class LabResultRecord extends MedicalRecord {
     public String createSummary() {
         return " Summary For Lab Results Record ";
     }
+
+    @Override
+    public MedicalRecord clone() {
+        return new LabResultRecord(
+                getPatientId(),
+                getRecordId(),
+                getCreatedAt(),
+                getRecordType(),
+                getContent()
+        );
+    }
 }

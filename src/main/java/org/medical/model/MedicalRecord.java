@@ -4,7 +4,7 @@ import org.medical.util.Enums.ReportType;
 
 import java.time.LocalDate;
 
-public abstract class MedicalRecord {
+public abstract class MedicalRecord implements Cloneable {
     private Integer recordId;
     private Integer patientId;
     private LocalDate createdAt;
@@ -74,4 +74,8 @@ public abstract class MedicalRecord {
                 ", content='" + content + '\'' +
                 '}';
     }
+
+    @Override
+    public abstract MedicalRecord clone();
+
 }

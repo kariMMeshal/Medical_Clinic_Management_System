@@ -14,4 +14,15 @@ public class PatientHistoryRecord extends MedicalRecord {
     public String createSummary() {
         return "Summary For Patient History Record";
     }
+
+    @Override
+    public MedicalRecord clone() {
+        return new PatientHistoryRecord(
+                getPatientId(),
+                getRecordId(),
+                getCreatedAt(),
+                getRecordType(),
+                getContent()
+        );
+    }
 }

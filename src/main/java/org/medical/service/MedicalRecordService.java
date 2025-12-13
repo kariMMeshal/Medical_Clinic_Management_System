@@ -11,7 +11,7 @@ import java.util.List;
 public class MedicalRecordService {
 
     private static volatile MedicalRecordService instance;
-    private MedicalRecordRepository medicalRecordRepository;
+    private final MedicalRecordRepository medicalRecordRepository;
 
     private MedicalRecordService(MedicalRecordRepository medicalRecordRepository) {
         this.medicalRecordRepository = medicalRecordRepository;
@@ -36,9 +36,10 @@ public class MedicalRecordService {
         return medicalRecordRepository.findAll();
     }
 
-    public boolean createReport(Integer patientId, Integer recordId, LocalDate createdAt, ReportType recordType, String content) {
+    public MedicalRecord createReport(Integer patientId, Integer recordId, LocalDate createdAt, ReportType recordType, String content) {
         MedicalRecord medicalRecord = MedicalReportFactory.createReport(patientId, recordId, createdAt, recordType, content);
-        return medicalRecordRepository.save(medicalRecord);
+        medicalRecordRepository.save(medicalRecord);
+        return medicalRecord;
     }
 
 

@@ -13,4 +13,15 @@ public class PrescriptionRecord extends MedicalRecord {
     public String createSummary() {
         return "Summary For Prescription Record";
     }
+
+    @Override
+    public MedicalRecord clone() {
+        return new PrescriptionRecord(
+                getPatientId(),
+                getRecordId(),
+                getCreatedAt(),
+                getRecordType(),
+                getContent()
+        );
+    }
 }
