@@ -75,8 +75,28 @@ The project implements four main services, each interacting with a corresponding
 
 ### 2. Factory
 - Used to create specialized objects without exposing the creation logic:
-  - `DoctorFactory` → creates different doctor types.
-  - `MedicalReportFactory` → creates different medical record types (`PatientHistoryRecord`, `PrescriptionRecord`, etc.).
+    - `DoctorFactory` → creates different doctor types.
+    - `MedicalReportFactory` → creates different medical record types (`PatientHistoryRecord`, `PrescriptionRecord`, etc.).
+
+### 3. Builder
+- Simplifies creation of complex objects with optional fields:
+    - `PatientBuilder` → builds `Patient` objects incrementally, making patient creation flexible and readable.
+
+### 4. Prototype
+- Enables cloning of objects to create copies without re-initializing all fields:
+    - `MedicalRecord` and its subclasses implement `Cloneable` → allows creating follow-up or template records easily while keeping originals unchanged.
+
+### 5. MVC (Model-View-Controller)
+- Organizes the application into three layers:
+    - **Model**: Data and business logic (`Patient`, `Doctor`, `MedicalRecord`, `Appointment`).
+    - **View**: Presentation/UI layer (e.g., future Flutter or other front-end components).
+    - **Controller**: Handles user input and communicates between Model and View.
+- Ensures separation of concerns for maintainability and scalability.
+
+### Service Layer
+- Encapsulates business logic and coordinates data access:
+    - `PatientService`, `MedicalRecordService`, `DoctorService`, `AppointmentService`.
+- Sits between controllers and repositories, providing a clean API for the application and supporting the MVC architecture.
 
 ## Running the Project
 
@@ -100,7 +120,7 @@ for (Patient p : patientService.findAllPatients()) {
 ```
 
 ## Notes
-- Until now, no GUI or web interface is provided.
+- No GUI or web interface is provided yet.
 - All data is stored in memory (runtime) using `DBManager`.
 - Fully demonstrates clean architecture, service-repository pattern, and design patterns like Singleton and Factory.
 - Easily extendable for adding new services, records, or doctor types.
