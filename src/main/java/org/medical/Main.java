@@ -35,11 +35,13 @@ public class Main {
         Appointment appointment = appointmentController.scheduleAppointment("Kareem", doctor, LocalDateTime.of(2025, 12, 10, 8, 30));
         System.out.println(appointmentController.getAppointmentsByPatient("Kareem").toString());
 
-        // MedicalRecord Factory &  MedicalRecordController Usage
+        // MedicalRecord Factory & MedicalRecord Clone(Prototype Pattern) &  MedicalRecordController Usage
         MedicalRecord medicalRecord = MedicalReportFactory.createReport(4321, 1234, LocalDate.of(2025, 12, 5), ReportType.PATIENT_HISTORY, "Content Of the Report");
         if (medicalRecordController.saveReport(medicalRecord)) {
             System.out.println(medicalRecordController.getReportById(1234).toString());
         }
+        MedicalRecord cloned = medicalRecord.clone();
+        System.out.println(cloned);
 
         // PatientBuilder & PatientController Usage
         Patient patient = new PatientBuilder().patientName("Hamza").patientId(4321).patientAge(25).MedicalRecords(medicalRecordController.getReportsByPatientId(4321)).build();
