@@ -26,9 +26,10 @@ public class AppointmentService {
         return instance;
     }
 
-    public boolean scheduleAppointment(String patientName, Doctor doctor, LocalDateTime time) {
+    public Appointment scheduleAppointment(String patientName, Doctor doctor, LocalDateTime time) {
         Appointment appointment = new Appointment(null, patientName, doctor.getDoctorName(), time, "Scheduled");
-        return appointmentRepo.save(appointment);
+        appointmentRepo.save(appointment);
+        return appointment;
     }
 
 

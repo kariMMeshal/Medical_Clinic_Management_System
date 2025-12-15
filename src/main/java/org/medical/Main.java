@@ -1,27 +1,51 @@
 package org.medical;
 
-import org.medical.repositories.AppointmentRepository;
-import org.medical.repositories.DoctorRepository;
-import org.medical.repositories.MedicalRecordRepository;
-import org.medical.repositories.PatientRepository;
-import org.medical.service.AppointmentService;
-import org.medical.service.DoctorService;
-import org.medical.service.MedicalRecordService;
-import org.medical.service.PatientService;
+import org.medical.controller.AppointmentController;
+import org.medical.controller.DoctorController;
+import org.medical.controller.MedicalRecordController;
+import org.medical.controller.PatientController;
+import org.medical.model.Appointment;
+import org.medical.model.Doctor;
+import org.medical.model.MedicalRecord;
+import org.medical.model.Patient;
+import org.medical.util.Enums.DoctorSpecialization;
+import org.medical.util.Enums.ReportType;
+import org.medical.util.builder.PatientBuilder;
+import org.medical.util.factory.DoctorFactory;
+import org.medical.util.factory.MedicalReportFactory;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
-        AppointmentRepository appointmentRepository = AppointmentRepository.getInstance();
-        AppointmentService appointmentService = AppointmentService.getInstance(appointmentRepository);
 
-        DoctorRepository doctorRepository = DoctorRepository.getInstance();
-        DoctorService doctorService = DoctorService.getInstance(doctorRepository);
+        // using Singleton Instances For all Controllers to use them
+        AppointmentController appointmentController = AppointmentController.getInstance();
+        DoctorController doctorController = DoctorController.getInstance();
+        MedicalRecordController medicalRecordController = MedicalRecordController.getInstance();
+        PatientController patientController = PatientController.getInstance();
 
-        MedicalRecordRepository medicalRecordRepository = MedicalRecordRepository.getInstance();
-        MedicalRecordService medicalRecordService = MedicalRecordService.getInstance(medicalRecordRepository);
+        // Doctor Factory & Controller Usage
+        Doctor doctor = DoctorFactory.createDoctor(DoctorSpecialization.GENERAL, 12, "Dr.Ziyad");
+        if (doctorController.saveDoctor(doctor)) {
+            System.out.println(doctorController.getDoctorByName("Dr.Ziyad").toString());
+        }
+        // Appointment Controller Scheduler Usage
+        Appointment appointment = appointmentController.scheduleAppointment("Kareem", doctor, LocalDateTime.of(2025, 12, 10, 8, 30));
+        System.out.println(appointmentController.getAppointmentsByPatient("Kareem").toString());
 
-        PatientRepository patientRepository = PatientRepository.getInstance();
-        PatientService patientService = PatientService.getInstance(patientRepository);
+        // MedicalRecord Factory &  MedicalRecordController Usage
+        MedicalRecord medicalRecord = MedicalReportFactory.createReport(4321, 1234, LocalDate.of(2025, 12, 5), ReportType.PATIENT_HISTORY, "Content Of the Report");
+        if (medicalRecordController.saveReport(medicalRecord)) {
+            System.out.println(medicalRecordController.getReportById(1234).toString());
+        }
+
+        // PatientBuilder & PatientController Usage
+        Patient patient = new PatientBuilder().patientName("Hamza").patientId(4321).patientAge(25).MedicalRecords(medicalRecordController.getReportsByPatientId(4321)).build();
+        if (patientController.addPatient(patient)) {
+            System.out.println(patientController.getPatientById(4321));
+        }
 
 
     }

@@ -32,7 +32,7 @@ public class PatientBuilder {
         return this;
     }
 
-    public PatientBuilder setMedicalRecords(List<MedicalRecord> records) {
+    public PatientBuilder MedicalRecords(List<MedicalRecord> records) {
         this.medicalRecords = records;
         return this;
     }

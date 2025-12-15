@@ -4,7 +4,6 @@ import org.medical.model.Doctor;
 import org.medical.repositories.DoctorRepository;
 import org.medical.util.Enums.DoctorSpecialization;
 import org.medical.util.factory.DoctorFactory;
-import org.medical.util.singleton.DBManager;
 
 public class DoctorService {
 
@@ -33,6 +32,11 @@ public class DoctorService {
         doctorRepository.save(doctor);
         return doctor;
     }
+
+    public boolean saveDoctor(Doctor doctor) {
+        return doctorRepository.save(doctor);
+    }
+
 
     public Doctor getDoctorsBySpecialization(String doctorName) {
         return doctorRepository.findByName(doctorName);

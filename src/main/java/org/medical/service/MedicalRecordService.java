@@ -42,6 +42,10 @@ public class MedicalRecordService {
         return medicalRecord;
     }
 
+    public boolean saveReport(MedicalRecord medicalRecord) {
+        return medicalRecordRepository.save(medicalRecord);
+    }
+
 
     public MedicalRecord findReportById(Integer recordId) {
         return medicalRecordRepository.findById(recordId);

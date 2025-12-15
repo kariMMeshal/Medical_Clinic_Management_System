@@ -26,8 +26,8 @@ public class DoctorRepository {
         return instance;
     }
 
-    public void save(Doctor doctor) {
-        doctors.add(doctor);
+    public boolean save(Doctor doctor) {
+        return doctors.add(doctor);
     }
 
 
