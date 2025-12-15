@@ -24,6 +24,11 @@ src/main/java/org/medical
 │   ├── DoctorService.java
 │   ├── MedicalRecordService.java
 │   └── PatientService.java
+├── controller/             # Controller layer (delegates to services)
+│   ├── AppointmentController.java
+│   ├── DoctorController.java
+│   ├── MedicalRecordController.java
+│   └── PatientController.java
 ├── util/
 │   ├── Enums/              # Enum types
 │   │   ├── DoctorSpecialization.java
@@ -35,6 +40,7 @@ src/main/java/org/medical
 │       ├── AppointmentScheduler.java
 │       └── DBManager.java
 └── Main.java               # Entry point (client)
+
 ```
 
 ## Main Features
