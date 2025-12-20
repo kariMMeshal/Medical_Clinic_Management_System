@@ -8,8 +8,11 @@ import org.medical.model.Appointment;
 import org.medical.model.Doctor;
 import org.medical.model.MedicalRecord;
 import org.medical.model.Patient;
+import org.medical.service.InsuranceService;
 import org.medical.util.Enums.DoctorSpecialization;
 import org.medical.util.Enums.ReportType;
+import org.medical.util.adapter.ExternalInsuranceAPI;
+import org.medical.util.adapter.InsuranceAdapter;
 import org.medical.util.builder.PatientBuilder;
 import org.medical.util.factory.DoctorFactory;
 import org.medical.util.factory.MedicalReportFactory;
@@ -49,6 +52,13 @@ public class Main {
             System.out.println(patientController.getPatientById(4321));
         }
 
+        // Usage of Adapter Pattern
+        ExternalInsuranceAPI externalInsuranceAPI = new ExternalInsuranceAPI();
+        InsuranceService insuranceService = new InsuranceAdapter(externalInsuranceAPI);
+        boolean covered = insuranceService.verifyCoverage(1234);
+        double copay = insuranceService.calculateCoPay(1234, 500.0);
+        System.out.println(covered);
+        System.out.println(copay);
 
     }
 }
