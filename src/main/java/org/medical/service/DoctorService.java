@@ -5,6 +5,8 @@ import org.medical.repositories.DoctorRepository;
 import org.medical.util.Enums.DoctorSpecialization;
 import org.medical.util.factory.DoctorFactory;
 
+import java.util.List;
+
 public class DoctorService {
 
     private static volatile DoctorService instance;
@@ -44,6 +46,10 @@ public class DoctorService {
 
     public boolean deleteDoctorById(Integer doctorId) {
         return doctorRepository.deleteById(doctorId);
+    }
+
+    public List<Doctor> getAllDoctors(){
+        return doctorRepository.findAll();
     }
 
 }

@@ -38,8 +38,8 @@ public class AppointmentController {
 
     // ---------- Delegation Methods ----------
 
-    public Appointment scheduleAppointment(String patientName, Doctor doctor, LocalDateTime time) {
-        return appointmentService.scheduleAppointment(patientName, doctor, time);
+    public Appointment scheduleAppointment(Integer id, String patientName, Doctor doctor, LocalDateTime time) {
+        return appointmentService.scheduleAppointment(id, patientName, doctor, time);
     }
 
     public boolean cancelAppointment(Integer appointmentId) {

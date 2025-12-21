@@ -16,7 +16,9 @@ import org.medical.util.adapter.InsuranceAdapter;
 import org.medical.util.builder.PatientBuilder;
 import org.medical.util.factory.DoctorFactory;
 import org.medical.util.factory.MedicalReportFactory;
+import org.medical.view.MainDashboardView;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -35,7 +37,7 @@ public class Main {
             System.out.println(doctorController.getDoctorByName("Dr.Ziyad").toString());
         }
         // Appointment Controller Scheduler Usage
-        Appointment appointment = appointmentController.scheduleAppointment("Kareem", doctor, LocalDateTime.of(2025, 12, 10, 8, 30));
+        Appointment appointment = appointmentController.scheduleAppointment(5,"Kareem", doctor, LocalDateTime.of(2025, 12, 10, 8, 30));
         System.out.println(appointmentController.getAppointmentsByPatient("Kareem").toString());
 
         // MedicalRecord Factory & MedicalRecord Clone(Prototype Pattern) &  MedicalRecordController Usage
@@ -60,5 +62,8 @@ public class Main {
         System.out.println(covered);
         System.out.println(copay);
 
+        // Start GUI on Event Dispatch Thread (EDT)
+        SwingUtilities.invokeLater(MainDashboardView::new);
     }
+
 }

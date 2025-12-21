@@ -5,6 +5,8 @@ import org.medical.repositories.DoctorRepository;
 import org.medical.service.DoctorService;
 import org.medical.util.Enums.DoctorSpecialization;
 
+import java.util.List;
+
 /**
  * Singleton Controller responsible for:
  * - Creating DoctorRepository
@@ -37,12 +39,17 @@ public class DoctorController {
 
     // ---------- Option 1: Accept raw values ----------
     public Doctor createDoctor(Integer doctorId,
-                             String doctorName,
-                             DoctorSpecialization specialization) {
+                               String doctorName,
+                               DoctorSpecialization specialization) {
         return doctorService.createDoctor(doctorId, doctorName, specialization);
     }
 
     // ---------- Option 2: Accept ready object ----------
+
+    public List<Doctor> getAllDoctors() {
+        return doctorService.getAllDoctors();
+    }
+
     public boolean saveDoctor(Doctor doctor) {
         return doctorService.saveDoctor(doctor);
     }
@@ -54,4 +61,5 @@ public class DoctorController {
     public boolean deleteDoctorById(Integer doctorId) {
         return doctorService.deleteDoctorById(doctorId);
     }
+
 }
