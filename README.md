@@ -4,7 +4,12 @@ A Java project simulating a medical clinic management system. The project is str
 
 **Note:** No UI is included—interactions are handled programmatically via the `Main` class.
 
-## Project Structure
+## - Main Dash Board 
+
+<img width="1715" height="972" alt="Screenshot 2025-12-27 183343" src="https://github.com/user-attachments/assets/724bd1f1-4757-4d92-8a6b-bf83d4c99631" />
+
+
+## - Project Structure
 
 ```
 src/main/java/org/medical
@@ -43,7 +48,7 @@ src/main/java/org/medical
 
 ```
 
-## Main Features
+## - Main Features
 
 The project implements four main services, each interacting with a corresponding repository:
 
@@ -73,7 +78,7 @@ The project implements four main services, each interacting with a corresponding
 - List all patients.
 - Uses **singleton** for repository.
 
-## Design Patterns
+## - Design Patterns
 
 ### 1. Singleton
 - Ensures a single instance for repositories (`AppointmentRepository`, `DoctorRepository`, `MedicalRecordRepository`, `PatientRepository`) and services.
@@ -104,14 +109,14 @@ The project implements four main services, each interacting with a corresponding
     - `PatientService`, `MedicalRecordService`, `DoctorService`, `AppointmentService`.
 - Sits between controllers and repositories, providing a clean API for the application and supporting the MVC architecture.
 
-## Running the Project
+## - Running the Project
 
 1. Clone the repository.
 2. Import it into your Java IDE (e.g., IntelliJ IDEA).
 3. Run the `Main.java` class.
 4. All operations (CRUD for patients, doctors, appointments, and medical records) are executed programmatically.
 
-### Example
+### - Example
 ```java
 PatientRepository patientRepo = PatientRepository.getInstance();
 PatientService patientService = PatientService.getInstance(patientRepo);
@@ -125,7 +130,7 @@ for (Patient p : patientService.findAllPatients()) {
 }
 ```
 
-## Notes
+## - Notes
 - No GUI or web interface is provided yet.
 - All data is stored in memory (runtime) using `DBManager`.
 - Fully demonstrates clean architecture, service-repository pattern, and design patterns like Singleton and Factory.
