@@ -1,137 +1,162 @@
 # Medical Clinic Management System (Java)
 
-A Java project simulating a medical clinic management system. The project is structured using **repositories**, **services**, **singleton**, and **factory** patterns for clean, maintainable code.
+## Project Documentation
 
-**Note:** No UI is included—interactions are handled programmatically via the `Main` class.
+### 1. Project Overview
 
-## - Main Dash Board 
+The Medical Clinic Management System is a Java application that simulates the core operations of a medical clinic. It demonstrates clean architecture principles and uses repositories, services, controllers, and multiple design patterns to ensure maintainability, scalability, and clarity.
 
-<img width="1715" height="972" alt="Screenshot 2025-12-27 183343" src="https://github.com/user-attachments/assets/724bd1f1-4757-4d92-8a6b-bf83d4c99631" />
+The system follows a layered architecture and was originally designed for programmatic interaction. It has been extended to support a graphical user interface (GUI) through a dedicated View layer, enabling user-friendly interaction while preserving the separation of concerns.
 
 
-## - Project Structure
+### 2. Project Structure
 
 ```
 src/main/java/org/medical
 ├── model/                  # Data models
-│   ├── Appointment.java
-│   ├── Doctor.java
-│   ├── MedicalRecord.java
-│   ├── Patient.java
-│   └── ... (other specialized doctor and record classes)
-├── repositories/           # Data access layer (CRUD operations)
-│   ├── AppointmentRepository.java
-│   ├── DoctorRepository.java
-│   ├── MedicalRecordRepository.java
-│   └── PatientRepository.java
-├── service/                # Business logic layer
-│   ├── AppointmentService.java
-│   ├── DoctorService.java
-│   ├── MedicalRecordService.java
-│   └── PatientService.java
-├── controller/             # Controller layer (delegates to services)
-│   ├── AppointmentController.java
-│   ├── DoctorController.java
-│   ├── MedicalRecordController.java
-│   └── PatientController.java
+├── repositories/           # CRUD data access
+├── service/                # Business logic
+├── controller/             # Input handling & delegation
+├── view/                   # GUI (Swing-based View Layer)
 ├── util/
-│   ├── Enums/              # Enum types
-│   │   ├── DoctorSpecialization.java
-│   │   └── ReportType.java
-│   ├── factory/            # Factory pattern for object creation
-│   │   ├── DoctorFactory.java
-│   │   └── MedicalReportFactory.java
-│   └── singleton/          # Singleton utility classes
-│       ├── AppointmentScheduler.java
-│       └── DBManager.java
-└── Main.java               # Entry point (client)
-
+│   ├── Enums/
+│   ├── factory/
+│   └── singleton/
+└── Main.java               # Entry point
 ```
 
-## - Main Features
+### 3. Class Descriptions
 
-The project implements four main services, each interacting with a corresponding repository:
+#### 3.1 Model Classes
 
-### 1. AppointmentService
-- Schedule appointments with doctors.
-- Cancel appointments.
-- List all appointments.
-- Uses **singleton** for repository and `AppointmentScheduler`.
+- **Patient.java** – Represents a patient with attributes such as ID, name, age, and medical records.
+- **Doctor.java** – Represents doctors with specialization, availability, and personal details.
+- **Appointment.java** – Contains appointment details linking patients and doctors.
+- **MedicalRecord.java** – Base class for patient medical records, including history, prescriptions, and test results.
+- **Specialized subclasses** – Cardiologist, Neurologist, PrescriptionRecord, PatientHistoryRecord, and other specialized medical record or doctor types.
 
-### 2. DoctorService
-- Add new doctors (General, Cardiologist, Neurologist, Lab, etc.).
-- Update or remove doctors.
-- List all doctors and filter by specialization.
-- Uses **singleton** pattern for repository.
-- Supports **factory** pattern via `DoctorFactory` for creating specialized doctors.
+#### 3.2 Repository Classes
 
-### 3. MedicalRecordService
-- Create medical records for patients.
-- Retrieve records by patient or record ID.
-- Delete medical records.
-- Uses **singleton** for repository.
-- Uses **factory** pattern via `MedicalReportFactory` to generate different record types (`PatientHistoryRecord`, `PrescriptionRecord`, etc.).
+- **AppointmentRepository.java**
+- **DoctorRepository.java**
+- **MedicalRecordRepository.java**
+- **PatientRepository.java**
 
-### 4. PatientService
-- Add, update, and delete patients.
-- Retrieve patient information by ID.
-- List all patients.
-- Uses **singleton** for repository.
+These classes handle CRUD operations and data storage. All repositories are implemented using the Singleton pattern to ensure a single source of truth and consistent data access throughout the system.
 
-## - Design Patterns
+#### 3.3 Service Classes
 
-### 1. Singleton
-- Ensures a single instance for repositories (`AppointmentRepository`, `DoctorRepository`, `MedicalRecordRepository`, `PatientRepository`) and services.
-- Ensures consistent access to in-memory database via `DBManager`.
+- **AppointmentService.java**  
+  Handles scheduling, cancellation, and listing of appointments. Internally uses AppointmentScheduler to manage appointment rules and conflicts.
 
-### 2. Factory
-- Used to create specialized objects without exposing the creation logic:
-    - `DoctorFactory` → creates different doctor types.
-    - `MedicalReportFactory` → creates different medical record types (`PatientHistoryRecord`, `PrescriptionRecord`, etc.).
+- **DoctorService.java**  
+  Manages doctor creation, updates, deletion, and filtering by specialization. Uses the Factory pattern to create specialized doctor instances.
 
-### 3. Builder
-- Simplifies creation of complex objects with optional fields:
-    - `PatientBuilder` → builds `Patient` objects incrementally, making patient creation flexible and readable.
+- **MedicalRecordService.java**  
+  Creates, retrieves, deletes, and clones medical records. Uses Factory for record creation and Prototype for cloning records to support follow-ups.
 
-### 4. Prototype
-- Enables cloning of objects to create copies without re-initializing all fields:
-    - `MedicalRecord` and its subclasses implement `Cloneable` → allows creating follow-up or template records easily while keeping originals unchanged.
+- **PatientService.java**  
+  Adds, updates, deletes, and lists patients. Interacts with a Singleton patient repository.
 
-### 5. MVC (Model-View-Controller)
-- Organizes the application into three layers:
-    - **Model**: Data and business logic (`Patient`, `Doctor`, `MedicalRecord`, `Appointment`).
-    - **View**: Presentation/UI layer (e.g., future React or other front-end components).
-    - **Controller**: Handles user input and communicates between Model and View.
-- Ensures separation of concerns for maintainability and scalability.
+- **InsuranceService.java**  
+  Handles insurance-related operations such as insurance validation, coverage checks, and claim eligibility. This service communicates with external insurance systems through adapters to unify different insurance provider interfaces.
 
-### 6. Service Layer
-- Encapsulates business logic and coordinates data access:
-    - `PatientService`, `MedicalRecordService`, `DoctorService`, `AppointmentService`.
-- Sits between controllers and repositories, providing a clean API for the application and supporting the MVC architecture.
+#### 3.4 Controller Classes
 
-## - Running the Project
+Controllers act as intermediaries between the View layer and the Service layer.
 
-1. Clone the repository.
-2. Import it into your Java IDE (e.g., IntelliJ IDEA).
-3. Run the `Main.java` class.
-4. All operations (CRUD for patients, doctors, appointments, and medical records) are executed programmatically.
+- **AppointmentController.java**
+- **DoctorController.java**
+- **PatientController.java**
+- **InsuranceController.java**
 
-### - Example
+They receive input from Main or GUI views, validate it, and delegate requests to the appropriate service without containing business logic.
+
+#### 3.5 View Layer (GUI)
+
+<img width="1715" height="972" alt="image" src="https://github.com/user-attachments/assets/a24c35f3-60c4-4e89-940b-cc19144b45b4" />
+
+
+**Responsibilities of the View Layer:**
+
+- Display data to the user using tables, forms, and dropdown menus.
+- Capture user input (add, delete, select, schedule actions).
+- Forward user actions to controllers.
+- Refresh displayed data after operations.
+
+The View layer contains no business logic and communicates only with controllers, ensuring strict adherence to MVC principles.
+
+#### 3.6 Utility Classes
+
+**Enums**
+
+- **DoctorSpecialization.java**
+- **ReportType.java**
+
+Provide strong-typed values and improve code readability.
+
+**Factory**
+
+- **DoctorFactory.java**
+- **MedicalReportFactory.java**
+
+Encapsulate object creation logic and hide instantiation details.
+
+**Singleton**
+
+- **AppointmentScheduler.java**
+- **DBManager.java**
+
+Ensure centralized scheduling and database access using a single instance.
+
+### 4. Design Patterns & Justifications
+
+| Pattern    | Where Used                          | Justification |
+|------------|-------------------------------------|---------------|
+| Singleton | Repositories, DBManager, AppointmentScheduler | Ensures one instance of critical components, maintains data consistency, and prevents duplicate repositories or managers. |
+| Factory   | DoctorFactory, MedicalReportFactory | Encapsulates object creation logic and allows easy extension without modifying existing client code. |
+| Builder   | PatientBuilder                      | Simplifies the creation of Patient objects with optional fields and improves readability and flexibility. |
+| Prototype | MedicalRecord subclasses             | Supports cloning of medical records for follow-ups or templates without reinitializing all fields. |
+| MVC       | Models, Views, Controllers          | Separates concerns: Models handle data, Views handle UI, Controllers delegate actions, enabling maintainability and scalability. |
+| Service Layer | *Service.java classes              | Encapsulates business logic and decouples controllers from repositories. |
+| Adapter   | Insurance integration                | Adapts external insurance systems with incompatible interfaces into a unified internal interface, enabling seamless integration without modifying core logic. |
+
+### 5. Main Features
+
+- **Appointment Management** – Schedule, cancel, and list appointments.
+- **Doctor Management** – Add, update, remove, and filter doctors by specialization.
+- **Medical Record Management** – Create, retrieve, clone, and delete medical records.
+- **Patient Management** – Add, update, delete, and list patients.
+- **Insurance Handling** – Validate insurance data and manage coverage using adapters.
+
+### 6. Example Usage via Controller
+
 ```java
-PatientRepository patientRepo = PatientRepository.getInstance();
-PatientService patientService = PatientService.getInstance(patientRepo);
+PatientController patientController = new PatientController();
+DoctorController doctorController = new DoctorController();
+AppointmentController appointmentController = new AppointmentController();
 
 // Add patient
-patientService.addPatient(new Patient(1, "Alice", 30, null));
+patientController.addPatient(1, "Alice", 30);
+
+// Add doctor
+doctorController.addDoctor("Dr. Smith", "Cardiologist");
+
+// Schedule appointment
+appointmentController.scheduleAppointment(1, 1, "2025-12-20 10:00");
 
 // List all patients
-for (Patient p : patientService.findAllPatients()) {
+for (Patient p : patientController.getAllPatients()) {
     System.out.println(p);
 }
 ```
 
-## - Notes
-- No GUI or web interface is provided yet.
-- All data is stored in memory (runtime) using `DBManager`.
-- Fully demonstrates clean architecture, service-repository pattern, and design patterns like Singleton and Factory.
-- Easily extendable for adding new services, records, or doctor types.
+### 7. Benefits & Extensibility
+
+- Centralized and consistent data handling using Singleton.
+- Easy addition of new doctor types and medical records using Factory.
+- Cloning medical records for follow-ups using Prototype.
+- Flexible object construction using Builder.
+- Clean separation of concerns using MVC and Service Layer.
+- Seamless integration of external insurance systems using Adapter.
+- Fully extendable for future enhancements such as database persistence, REST APIs, or advanced UI frameworks.
